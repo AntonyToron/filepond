@@ -34,7 +34,7 @@ export const processFileChunked = (apiUrl, action, name, file, metadata, load, e
 
     // create server hook
     const requestTransferId = cb => {
-
+        console.log("Requesting transfer");
         const formData = new FormData();
         
         // add metadata under same name
@@ -44,6 +44,7 @@ export const processFileChunked = (apiUrl, action, name, file, metadata, load, e
             ...action.headers,
             'Upload-Length': file.size,
             'Upload-Name': file.name,
+            'Custom-Header': 'Testing',
         };
 
         const requestParams = {
@@ -152,6 +153,7 @@ export const processFileChunked = (apiUrl, action, name, file, metadata, load, e
         // send request object
         const requestUrl = buildURL(apiUrl, chunkServer.url, state.serverId);
 
+        console.log("Chunk processed");
         const headers = typeof chunkServer.headers === 'function' ? chunkServer.headers(chunk) : {
             ...chunkServer.headers,
             'Content-Type': 'application/offset+octet-stream',
