@@ -23,7 +23,9 @@ export const sendRequest = (data, url, options) => {
     // set default options
     options = {
         method: 'POST',
-        headers: {},
+        headers: {
+          'Custom-thing': 'test',
+        },
         withCredentials: false,
         ...options
     };
